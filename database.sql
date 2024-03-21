@@ -11,3 +11,10 @@ create table categories(
     name varchar(100) not null,
     description varchar(500)
 )engine InnoDB;
+
+
+alter table customers
+    add column age tinyint;
+
+alter table customers
+    add column married boolean;
