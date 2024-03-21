@@ -18,3 +18,6 @@ alter table customers
 
 alter table customers
     add column married boolean;
+
+alter table customers
+    add column type varchar(50);
