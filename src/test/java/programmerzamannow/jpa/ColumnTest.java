@@ -20,6 +20,26 @@ public class ColumnTest {
         customer.setId("1");
         customer.setName("Hanif");
         customer.setPrimaryEmail("contoh@example.com");
+        customer.setFullName("Hanif Faiz Hidayat");
+
+        entityManager.persist(customer);
+
+        entityTransaction.commit();
+        entityManager.close();
+    }
+
+    @Test
+    void transientTest() {
+        EntityManagerFactory entityManagerTest = JpaUtil.getEntityManagerFactory();
+        EntityManager entityManager = entityManagerTest.createEntityManager();
+        EntityTransaction entityTransaction = entityManager.getTransaction();
+        entityTransaction.begin();
+
+        Customer customer = new Customer();
+        customer.setId("4");
+        customer.setName("Hanif");
+        customer.setPrimaryEmail("contoh@example.com");
+        customer.setFullName("Hanif Faiz Hidayat");
 
         entityManager.persist(customer);
 
