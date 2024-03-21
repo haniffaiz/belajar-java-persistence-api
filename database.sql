@@ -44,3 +44,10 @@ create table members(
     middle_name varchar(100),
     last_name varchar(100)
 )engine InnoDB;
+
+create table departments(
+    company_id varchar(100) not null,
+    department_id varchar(100) not null,
+    name varchar(150) not null,
+    primary key (company_id, department_id)
+)engine InnoDB;

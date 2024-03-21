@@ -3,10 +3,9 @@ package programmerzamannow.jpa;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
 import jakarta.persistence.EntityTransaction;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
-import programmerzamannow.jpa.entity.Customer;
-import programmerzamannow.jpa.entity.Member;
-import programmerzamannow.jpa.entity.Name;
+import programmerzamannow.jpa.entity.*;
 import programmerzamannow.jpa.util.JpaUtil;
 
 public class EmbededTest {
@@ -29,6 +28,47 @@ public class EmbededTest {
         member.setName(name);
 
         entityManager.persist(member);
+
+        entityTransaction.commit();
+        entityManager.close();
+    }
+
+    @Test
+    void embededId() {
+        EntityManagerFactory entityManagerTest = JpaUtil.getEntityManagerFactory();
+        EntityManager entityManager = entityManagerTest.createEntityManager();
+        EntityTransaction entityTransaction = entityManager.getTransaction();
+        entityTransaction.begin();
+
+        DepartmentId id = new DepartmentId();
+        id.setCompany_id("pzn");
+        id.setDepartment_id("tech");
+
+        Department department = new Department();
+        department.setId(id);
+        department.setName("Teknologi");
+
+        entityManager.persist(department);
+
+
+        entityTransaction.commit();
+        entityManager.close();
+    }
+
+    @Test
+    void embededIdFind() {
+        EntityManagerFactory entityManagerTest = JpaUtil.getEntityManagerFactory();
+        EntityManager entityManager = entityManagerTest.createEntityManager();
+        EntityTransaction entityTransaction = entityManager.getTransaction();
+        entityTransaction.begin();
+
+        DepartmentId id = new DepartmentId();
+        id.setCompany_id("pzn");
+        id.setDepartment_id("tech");
+
+        Department department = entityManager.find(Department.class, id);
+        Assertions.assertEquals("Teknologi", department.getName());
+
 
         entityTransaction.commit();
         entityManager.close();
