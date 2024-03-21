@@ -35,3 +35,12 @@ create table images(
     description text,
     image blob
 )engine InnoDB;
+
+create table members(
+    id int not null auto_increment primary key,
+    email varchar(150) not null,
+    title varchar(100),
+    first_name varchar(100)not null,
+    middle_name varchar(100),
+    last_name varchar(100)
+)engine InnoDB;
