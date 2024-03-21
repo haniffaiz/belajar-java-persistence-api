@@ -27,3 +27,11 @@ alter table categories
 
 alter table categories
     add column updated_at timestamp;
+
+
+create table images(
+    id int not null auto_increment primary key,
+    name varchar(100) not null,
+    description text,
+    image blob
+)engine InnoDB;
