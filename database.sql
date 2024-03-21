@@ -21,3 +21,9 @@ alter table customers
 
 alter table customers
     add column type varchar(50);
+
+alter table categories
+    add column created_at timestamp;
+
+alter table categories
+    add column updated_at timestamp;
