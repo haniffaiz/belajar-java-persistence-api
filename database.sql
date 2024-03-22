@@ -59,3 +59,13 @@ create table hobbies(
     foreign key fk_members_hobbies (member_id)
     references members (id)
 )engine InnoDB;
+
+create table skills(
+    id int not null auto_increment primary key,
+    member_id int not null,
+    name varchar(100) not null,
+    value int not null,
+    foreign key fk_members_skills (member_id)
+    references members (id),
+    constraint skills_unique unique (member_id, name)
+)engine InnoDB;

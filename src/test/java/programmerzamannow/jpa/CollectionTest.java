@@ -10,6 +10,7 @@ import programmerzamannow.jpa.entity.Name;
 import programmerzamannow.jpa.util.JpaUtil;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class CollectionTest {
 
@@ -54,6 +55,31 @@ public class CollectionTest {
         Member member = entityManager.find(Member.class,2);
 
         member.getHobbies().add("Traveling");
+
+        entityManager.merge(member);
+
+        entityTransaction.commit();
+        entityManager.close();
+    }
+
+    @Test
+    void updateSkills() {
+        /*
+        perlu diperhatikan ketika melakukan update collection
+        sebelum update, prosedurnya delete terlebih dahulu
+        baru update pada db. hindari table ke table lain
+         */
+        EntityManagerFactory entityManagerTest = JpaUtil.getEntityManagerFactory();
+        EntityManager entityManager = entityManagerTest.createEntityManager();
+        EntityTransaction entityTransaction = entityManager.getTransaction();
+        entityTransaction.begin();
+
+        Member member = entityManager.find(Member.class,2);
+        member.setSkills(new HashMap<>());
+        member.getSkills().put("Java", 90);
+        member.getSkills().put("Golang", 80);
+        member.getSkills().put("PHP", 85);
+
 
         entityManager.merge(member);
 
