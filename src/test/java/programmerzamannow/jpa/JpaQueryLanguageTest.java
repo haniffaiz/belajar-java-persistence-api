@@ -9,6 +9,7 @@ import org.junit.jupiter.api.Test;
 import programmerzamannow.jpa.entity.Brand;
 import programmerzamannow.jpa.entity.Member;
 import programmerzamannow.jpa.entity.Product;
+import programmerzamannow.jpa.entity.SimpleBrand;
 import programmerzamannow.jpa.util.JpaUtil;
 
 import java.util.List;
@@ -148,6 +149,46 @@ public class JpaQueryLanguageTest {
 
         for (Brand brand : brands){
             System.out.println(brand.getId()+" : "+brand.getName());
+        }
+
+
+        entityTransaction.commit();
+        entityManager.close();
+    }
+
+    @Test
+    void selectSomeFields() {
+        EntityManagerFactory entityManagerFactory = JpaUtil.getEntityManagerFactory();
+        EntityManager entityManager = entityManagerFactory.createEntityManager();
+        EntityTransaction entityTransaction = entityManager.getTransaction();
+        entityTransaction.begin();
+
+        TypedQuery<Object[]> query = entityManager.createQuery("select b.id, b.name from Brand b where b.name=:name", Object[].class);
+        query.setParameter("name", "Xiaomi");
+        List<Object[]> objects = query.getResultList();
+
+        for (Object[] object : objects){
+            System.out.println(object[0]+" : "+object[1]);
+        }
+
+
+        entityTransaction.commit();
+        entityManager.close();
+    }
+
+    @Test
+    void selectNewConstructor() {
+        EntityManagerFactory entityManagerFactory = JpaUtil.getEntityManagerFactory();
+        EntityManager entityManager = entityManagerFactory.createEntityManager();
+        EntityTransaction entityTransaction = entityManager.getTransaction();
+        entityTransaction.begin();
+
+        TypedQuery<SimpleBrand> query = entityManager.createQuery("select new programmerzamannow.jpa.entity.SimpleBrand(b.id, b.name) from Brand b where b.name=:name", SimpleBrand.class);
+        query.setParameter("name", "Xiaomi");
+        List<SimpleBrand> simpleBrands = query.getResultList();
+
+        for (SimpleBrand simpleBrand : simpleBrands){
+            System.out.println(simpleBrand.getId()+" : "+simpleBrand.getName());
         }
 
 
