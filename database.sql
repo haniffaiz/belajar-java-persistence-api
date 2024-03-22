@@ -87,3 +87,18 @@ create table wallet(
     balance bigint not null,
     foreign key fk_users_wallet (user_id) references users(id)
 )engine InnoDB;
+
+create table brands(
+    id varchar(100) not null primary key,
+    name varchar(150) not null,
+    description varchar(500)
+)engine InnoDB;
+
+create table products(
+    id varchar(100) not null primary key,
+    brand_id varchar(100) not null,
+    name varchar(100) not null,
+    price bigint not null,
+    description varchar(500),
+    foreign key fk_brands_products (brand_id) references brands(id)
+)engine InnoDB;
