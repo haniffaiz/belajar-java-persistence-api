@@ -69,3 +69,21 @@ create table skills(
     references members (id),
     constraint skills_unique unique (member_id, name)
 )engine InnoDB;
+
+create table credentials(
+    id varchar(100) not null primary key,
+    email varchar(150) not null,
+    password varchar(150) not null
+)engine InnoDB;
+
+create table users(
+    id varchar(100) not null primary key,
+    name varchar(150) not null
+)engine InnoDB;
+
+create table wallet(
+    id int not null auto_increment primary key,
+    user_id varchar(100) not null,
+    balance bigint not null,
+    foreign key fk_users_wallet (user_id) references users(id)
+)engine InnoDB;
