@@ -51,3 +51,11 @@ create table departments(
     name varchar(150) not null,
     primary key (company_id, department_id)
 )engine InnoDB;
+
+create table hobbies(
+    id int not null auto_increment primary key,
+    member_id int not null,
+    name varchar(150) not null,
+    foreign key fk_members_hobbies (member_id)
+    references members (id)
+)engine InnoDB;
