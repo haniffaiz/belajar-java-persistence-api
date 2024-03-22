@@ -3,6 +3,7 @@ package programmerzamannow.jpa;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
 import jakarta.persistence.EntityTransaction;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import programmerzamannow.jpa.entity.Category;
 import programmerzamannow.jpa.entity.Member;
@@ -27,6 +28,25 @@ public class EntityListenerTest {
         category.setName("Contoh");
 
         entityManager.persist(category);
+
+        entityTransaction.commit();
+        entityManager.close();
+    }
+
+    @Test
+    void listenerEntity() {
+        /*
+        perlu diperhatikan ketika melakukan update collection
+        sebelum update, prosedurnya delete terlebih dahulu
+        baru update pada db. hindari table ke table lain
+         */
+        EntityManagerFactory entityManagerTest = JpaUtil.getEntityManagerFactory();
+        EntityManager entityManager = entityManagerTest.createEntityManager();
+        EntityTransaction entityTransaction = entityManager.getTransaction();
+        entityTransaction.begin();
+
+        Member member = entityManager.find(Member.class, 1);
+        Assertions.assertEquals("Mr. Hanif Faiz Hidayat", member.getFullName());
 
         entityTransaction.commit();
         entityManager.close();
