@@ -136,16 +136,14 @@ public class JpaQueryLanguageTest {
     }
 
     @Test
-    void limitOffset() {
+    void namedQuery() {
         EntityManagerFactory entityManagerFactory = JpaUtil.getEntityManagerFactory();
         EntityManager entityManager = entityManagerFactory.createEntityManager();
         EntityTransaction entityTransaction = entityManager.getTransaction();
         entityTransaction.begin();
 
-        TypedQuery<Brand> query = entityManager.createQuery("select b from Brand b order by b.id", Brand.class);
-        //limit offset
-        query.setFirstResult(10);
-        query.setMaxResults(10);
+        TypedQuery<Brand> query = entityManager.createNamedQuery("Brand.findAllByName", Brand.class);
+        query.setParameter("name", "Xiaomi");
         List<Brand> brands = query.getResultList();
 
         for (Brand brand : brands){
