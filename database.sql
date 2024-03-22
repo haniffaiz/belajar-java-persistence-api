@@ -156,3 +156,8 @@ create table transactions_debit(
     created_at timestamp not null,
     debit_amount bigint not null
 )engine InnoDB;
+
+alter table brands
+    add column created_at timestamp;
+alter table brands
+    add column updated_at timestamp;
