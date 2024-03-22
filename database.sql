@@ -161,3 +161,5 @@ alter table brands
     add column created_at timestamp;
 alter table brands
     add column updated_at timestamp;
+alter table brands
+    add column version bigint;
