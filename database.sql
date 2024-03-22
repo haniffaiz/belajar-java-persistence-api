@@ -136,3 +136,23 @@ create table payments_credit_card(
     bank varchar(100) not null,
     foreign key fk_payments_credit_card (id) references payments(id)
 )engine InnoDB;
+
+create table transactions(
+    id varchar(100) not null primary key,
+    balance bigint not null,
+    created_at timestamp not null
+)engine InnoDB;
+
+create table transactions_credit(
+    id varchar(100) not null primary key,
+    balance bigint not null,
+    created_at timestamp not null,
+    credit_amount bigint not null
+)engine InnoDB;
+
+create table transactions_debit(
+    id varchar(100) not null primary key,
+    balance bigint not null,
+    created_at timestamp not null,
+    debit_amount bigint not null
+)engine InnoDB;
