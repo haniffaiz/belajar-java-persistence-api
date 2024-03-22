@@ -110,3 +110,11 @@ create table users_like_products(
     foreign key fk_products_to_users_like_products (product_id) references products(id),
     primary key (user_id, product_id)
 )engine InnoDB;
+
+create table employees(
+    id varchar(100) not null primary key,
+    type varchar(50) not null,
+    name varchar(100) not null,
+    total_manager int,
+    total_employee int
+)engine InnoDB;
