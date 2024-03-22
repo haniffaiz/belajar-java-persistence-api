@@ -118,3 +118,21 @@ create table employees(
     total_manager int,
     total_employee int
 )engine InnoDB;
+
+create table payments(
+    id varchar(100) not null primary key,
+    amount bigint not null
+)engine InnoDB;
+
+create table payments_gopay(
+    id varchar(100) not null primary key,
+    gopay_id varchar(100) not null,
+    foreign key fk_payments_gopay (id) references payments(id)
+)engine InnoDB;
+
+create table payments_credit_card(
+    id varchar(100) not null primary key,
+    masked_card varchar(100) not null,
+    bank varchar(100) not null,
+    foreign key fk_payments_credit_card (id) references payments(id)
+)engine InnoDB;
