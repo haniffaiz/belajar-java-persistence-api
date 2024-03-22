@@ -14,7 +14,7 @@ import java.util.List;
 public class JpaQueryLanguageTest {
 
     @Test
-    void transaction() {
+    void select() {
         EntityManagerFactory entityManagerFactory = JpaUtil.getEntityManagerFactory();
         EntityManager entityManager = entityManagerFactory.createEntityManager();
         EntityTransaction entityTransaction = entityManager.getTransaction();
